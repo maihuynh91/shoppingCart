@@ -7,21 +7,22 @@
     "test": "test"
   },
   "scripts": {
-    "test": "set NODE_ENV=test && jasmine",
-    "start": "node src/server.js"
+    "test": "set NODE_ENV=test&&jasmine",
+    "start": "node src/server.js",
+    "start-local": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maihuynh91/shoppingCart.git"
+    "url": "git+https://github.com/maihuynh91/item.git"
   },
   "author": "MaiHuynh",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/maihuynh91/shoppingCart/issues"
+    "url": "https://github.com/maihuynh91/item/issues"
   },
-  "homepage": "https://github.com/maihuynh91/shoppingCart#readme",
+  "homepage": "https://github.com/maihuynh91/item#readme",
   "devDependencies": {
-    "jasmine": "^3.0.0",
+    "jasmine": "^3.3.1",
     "request": "^2.83.0"
   },
   "dependencies": {
