@@ -1,0 +1,31 @@
+{
+  "name": "shoppingcart",
+  "version": "1.0.0",
+  "description": "Shared Real-time Grocery List",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "set NODE_ENV=test && jasmine",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maihuynh91/shoppingCart.git"
+  },
+  "author": "MaiHuynh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maihuynh91/shoppingCart/issues"
+  },
+  "homepage": "https://github.com/maihuynh91/shoppingCart#readme",
+  "devDependencies": {
+    "jasmine": "^3.0.0",
+    "request": "^2.83.0"
+  },
+  "dependencies": {
+    "dotenv": "^5.0.0",
+    "express": "^4.16.2"
+  }
+}
