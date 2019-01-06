@@ -1,0 +1,4 @@
+sequelize db:migrate && sequelize db:migrate --env test
+ sequelize db:migrate:undo:all && sequelize db:migrate:undo:all --env test
+
+ 
