@@ -3,8 +3,8 @@ module.exports = {
  
       if(req.method === "POST") {
   
-        req.checkParams("itemId", "must be valid").notEmpty().isInt();
-        req.checkBody("name", "must be at least 1 characters in length").isLength({min: 1});
+       // req.checkParams("itemId", "must be valid").notEmpty().isInt();
+       req.checkBody("name", "must not be empty").notEmpty();
         req.checkBody("description", "must be at least 2 characters in length").isLength({min: 2});
       }
   
@@ -22,7 +22,9 @@ module.exports = {
       if(req.method === "POST") {
  
         req.checkBody("email", "must be valid").isEmail();
-        req.checkBody("password", "must be at least 6 characters in length").isLength({min: 6})
+        req.checkBody("password", "must be at least 6 characters in length").isLength({min: 6});
+        req.checkBody("password", "must have no spaces.").custom(value => !/\s/.test(value))
+      
         req.checkBody("passwordConfirmation", "must match password provided").optional().matches(req.body.password);
       }
  

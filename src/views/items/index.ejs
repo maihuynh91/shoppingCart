@@ -6,7 +6,8 @@
   <body>
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
-
+      
+      <% if(currentUser)  { %>
       <h1>Items List</h1>
 
       <a href="/items/new">Add new Items</a>
@@ -20,7 +21,7 @@
           </li>
         <% }) %>
       </ul>
-
+<% } %>
     </main>
   </body>
 </html>

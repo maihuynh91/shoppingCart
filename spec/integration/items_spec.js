@@ -18,6 +18,13 @@ describe("routes : items", () => {
       })
       .then((user) => {
         this.user = user;
+        request.get({
+          url: "http://localhost:3000/auth/fake",
+          form: {
+            userId: user.id,
+            email: user.email
+          }
+        })
         Item.create({
           name: "apples",
           description: "gala apples",
@@ -37,31 +44,13 @@ describe("routes : items", () => {
 
   describe("user perform CRUD actions for items", () => {
 
-    beforeEach((done) => {
-      User.create({
-        email: "admin@example.com",
-        password: "password"
-      })
-      .then((user) => {
-        request.get({        
-          url: "http://localhost:3000/auth/fake",
-          form: {
-            userId: user.id,
-            email: user.email
-          }
-        },
-          (err, res, body) => {
-            done();
-          });
-      });
-    });
-
     describe("GET /items", () => {
       it("should render all items", (done) => {
         request.get(base, (err, req, body) => {
           expect(err).toBeNull();
           expect(body).toContain("Items");
           expect(body).toContain("apples");
+         // console.log(body)
           done();
         });
       });
@@ -78,22 +67,46 @@ describe("routes : items", () => {
     });
 
     describe("POST /items/create", () => {
-      const options = {
-        url: `${base}create`,
-        form: {
-          name: "aloha",
-          description: "hello aloha"
-        }
-      };
+ 
       it("should create a new item and redirect", (done) => {
-        request.post(options, 
+        const options = {
+          url: `${base}create`,
+          form: {
+            name: "blink-182 songs",
+            description: "What's your favorite blink-182 song?"
+          }
+        };
+        request.post(options,
           (err, res, body) => {
-            Item.findOne({where: {name: "aloha"}})
+            Item.findOne({where: {name: "blink-182 songs"}})
             .then((item) => {
               expect(item).not.toBeNull();
-              //expect(res.statusCode).toBe(303);
-              expect(item.name).toBe("aloha");
-              expect(item.description).toBe("hello aloha");
+              expect(err).toBeNull();
+              expect(item.name).toBe("blink-182 songs");
+              expect(item.description).toBe("What's your favorite blink-182 song?");
+              done();
+            })
+            .catch((err) => {
+              console.log(err);
+              done();
+            });
+          }
+        );
+      });
+
+      it("should not create a new item that validates the validations", (done) => {
+        const options = {
+          url: `${base}create`,
+          form: {
+            name: "",
+            description: "hello"
+          }
+        };
+        request.post(options, 
+          (err, res, body) => {
+            Item.findOne({where: {description: "hello"}})
+            .then((item) => {
+              expect(item).toBeNull();
               done();
             })
             .catch((err) => {
@@ -114,6 +127,64 @@ describe("routes : items", () => {
       });
     });
 
+    describe("POST /items/:id/destroy", () => {
+      it("should delete item with the associated id", (done) => {
+        Item.all()
+        .then((item) => {
+          const itemCountBeforeDelete = item.length;
+
+          expect(itemCountBeforeDelete).toBe(1);
+          request.post(`${base}${this.item.id}/destroy`, (err, res, body)=> {
+            Item.all()
+            .then((item) => {
+              expect(err).toBeNull();
+              expect(item.length).toBe(itemCountBeforeDelete-1);
+              done();
+            });
+          });
+        });
+      });
+    });
+
+    describe("GET /items/:id/edit", () => {
+      it("should render a view with an edit item form", (done) => {
+        request.get(`${base}${this.item.id}/edit`, (err, res, body) => {
+          expect(err).toBeNull();
+          expect(body).not.toBeNull()
+          expect(body).toContain("Edit Item");
+          expect(body).toContain("apples");
+          //expect(body.status).toBe(false)
+          done();
+        });
+      });
+    });
+
+    describe("POST /items/:id/update", () => {
+      it("should update item with the given value", (done)=> {
+        const options = {
+          url: `${base}${this.item.id}/update`,
+          form: {
+            name: "Fuji Apples",
+            description: "Crunchy and fresh apples",
+            status: true
+               }
+            };
+        request.post(options, 
+          (err, res, body) => {
+            expect(err).toBe(null);
+            Item.findOne({
+              where: {id: 1}
+            })
+            .then((item) => {
+              expect(err).toBeNull();
+              expect(item.name).toBe("Fuji Apples");
+            //  expect(item.description).toBe("Crunchy and fresh apples");
+              // expect(item.status).toBe(true);
+              done();
+            })
+          })
+    })
+    })
    
 
   })
