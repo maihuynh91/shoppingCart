@@ -1,35 +1,21 @@
 {
   "name": "shoppingcart",
   "version": "1.0.0",
-  "description": "Shared Real-time Grocery List",
+  "description": "",
   "main": "src/server.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "set NODE_ENV=test&&jasmine",
     "start": "node src/server.js",
     "start-local": "nodemon src/server.js"
   },
-
-
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/maihuynh91/item.git"
-  },
-  "author": "MaiHuynh",
+  "author": "maihuynh",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/maihuynh91/item/issues"
-  },
-  "homepage": "https://github.com/maihuynh91/item#readme",
   "devDependencies": {
-    "faker": "^4.1.0",
-    "jasmine": "^3.3.1",
-    "nodemon": "^1.18.9",
+    "jasmine": "^3.0.0",
     "request": "^2.83.0"
   },
   "dependencies": {
+    "faker": "^4.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.0",
@@ -39,12 +25,14 @@
     "express-session": "^1.15.6",
     "express-validator": "^5.0.2",
     "keyframe": "^2.1.0",
+    "moment": "^2.23.0",
+    "nodemon": "^1.18.9",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.32.6",
-    "sequelize-cli": "^5.4.0",
-    "slick-carousel": "^1.8.1"
+    "sequelize-cli": "^5.3.0",
+    "stripe": "^6.19.0"
   }
 }
