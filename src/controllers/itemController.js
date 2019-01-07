@@ -5,6 +5,7 @@ module.exports = {
 
     index(req, res, next){
       itemQueries.getAllItems(req.user.id,(err, items) => {
+       // console.log("err: " + err)
         if(err){
           res.redirect(500, "static/index");
         } else {

@@ -18,10 +18,10 @@ describe("routes : items", () => {
       })
       .then((user) => {
         this.user = user;
-        request.get({
-          url: "http://localhost:3000/auth/fake",
+        request.post({
+          url: "http://localhost:3000/users/sign_in",
           form: {
-            userId: user.id,
+            password: "123456",
             email: user.email
           }
         })
@@ -43,14 +43,16 @@ describe("routes : items", () => {
   })
 
   describe("user perform CRUD actions for items", () => {
-
+//failed
     describe("GET /items", () => {
-      it("should render all items", (done) => {
+      fit("should render all items", (done) => {
         request.get(base, (err, req, body) => {
           expect(err).toBeNull();
-          expect(body).toContain("Items");
-          expect(body).toContain("apples");
-         // console.log(body)
+          //expect(body).toMatch("Items List");
+         //
+          expect(body).toMatch("apples");
+         expect(body.indexOf("Items List") > -1).toBe(true)
+         //console.log("req: " + JSON.stringify(req))
           done();
         });
       });
@@ -118,10 +120,11 @@ describe("routes : items", () => {
     });
 
     describe("GET /items/:id", () => {
+      //failed
       it("should render a view with the selected item", (done) => {
         request.get(`${base}${this.item.id}`, (err, res, body) => {
           expect(err).toBeNull();
-          expect(body).toContain("apples");
+          expect(body).toBe("apples");
           done();
         });
       });
@@ -145,7 +148,7 @@ describe("routes : items", () => {
         });
       });
     });
-
+//failed
     describe("GET /items/:id/edit", () => {
       it("should render a view with an edit item form", (done) => {
         request.get(`${base}${this.item.id}/edit`, (err, res, body) => {
@@ -153,7 +156,7 @@ describe("routes : items", () => {
           expect(body).not.toBeNull()
           expect(body).toContain("Edit Item");
           expect(body).toContain("apples");
-          //expect(body.status).toBe(false)
+          expect(body.status).toBe(false)
           done();
         });
       });
@@ -178,8 +181,8 @@ describe("routes : items", () => {
             .then((item) => {
               expect(err).toBeNull();
               expect(item.name).toBe("Fuji Apples");
-            //  expect(item.description).toBe("Crunchy and fresh apples");
-              // expect(item.status).toBe(true);
+              expect(item.description).toBe("Crunchy and fresh apples");
+              expect(item.status).toBe(true);
               done();
             })
           })
