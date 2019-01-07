@@ -2,7 +2,7 @@
   "name": "shoppingcart",
   "version": "1.0.0",
   "description": "Shared Real-time Grocery List",
-  "main": "index.js",
+  "main": "src/server.js",
   "directories": {
     "test": "test"
   },
@@ -11,6 +11,8 @@
     "start": "node src/server.js",
     "start-local": "nodemon src/server.js"
   },
+
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maihuynh91/item.git"
