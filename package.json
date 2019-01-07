@@ -36,11 +36,13 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "express-validator": "^5.0.2",
+    "keyframe": "^2.1.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.32.6",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.4.0",
+    "slick-carousel": "^1.8.1"
   }
 }

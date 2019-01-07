@@ -10,15 +10,29 @@
       <% if(currentUser)  { %>
       <h1>Items List</h1>
 
-      <a href="/items/new">Add new Items</a>
-
+      <a class ="button" href="/items/new">Add new Items</a>
+<hr />
       <ul class="list-group">
 <!-- #1 -->
         <% items.forEach((item) => { %>
-<!-- #2 -->
+          
+<!-- #2 --> 
           <li class="list-group-item">
-            <a href="/items/<%= item.id %>"> <%= item.name %> </a>
+           
+              <a href="/items/<%= item.id %>"> Name: <%= item.name %></a> 
+              <p>Description: <%= item.description %> </p>
+            
+          <p class="form-group">
+              <label for="status">Status:</label>
+                <%if(item.status){ %>
+                Bought
+                <%}else{ %>
+                Empty
+                <%}%>
+          </p>
+         
           </li>
+        
         <% }) %>
       </ul>
 <% } %>

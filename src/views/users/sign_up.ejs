@@ -3,14 +3,13 @@
   <head>
     <% include ../static/partials/head.ejs %>
   </head>
-  <body>
+  <body style="background-color:lightgray">
 
     <% include ../static/partials/navbar.ejs %>
 
     <main class="container">
 
-      <% include ../static/partials/messages.ejs %>
-
+     
       <h1>Sign up</h1>
 
       <form action="/users" method="post">
@@ -24,17 +23,23 @@
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" class="form-control" name="password" aria-describedby="passwordHelp" placeholder="Enter password">
-          <small class="text-muted" id="passwordHelp">password must match confirmation below</small>
+          <small class="text-muted" id="passwordHelp">password must be at least 6 characters in length</small>
         </div>
 
         <div class="form-group">
           <label for="passwordConfirmation">Password confirmation</label>
           <input type="password" class="form-control" name="passwordConfirmation" aria-describedby="passwordHelp" placeholder="Enter password confirmation">
+          <small class="text-muted" id="passwordHelp">password must match the password above</small>
         </div>
 
         <button type="submit" class="btn btn-primary">Sign up</button>
+        
       </form>
+
+      <% include ../static/partials/messages.ejs %>
     </main>
+   
+
 
     <% include ../static/partials/baseScripts.ejs %>
 

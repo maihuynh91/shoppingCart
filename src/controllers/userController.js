@@ -39,7 +39,7 @@ module.exports = {
           res.redirect("/users/sign_in");
         } else {
           req.flash("notice", "You've successfully signed in!");
-          res.redirect("/");
+          res.redirect("/items");
         }
       })
     },
@@ -63,12 +63,6 @@ module.exports = {
          }
        });
      },
-
-     signOut(req, res, next){
-        req.logout();
-        req.flash("notice", "You've successfully signed out!");
-        res.redirect("/");
-      }
 
     
   }
