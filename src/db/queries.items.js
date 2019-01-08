@@ -15,7 +15,7 @@ module.exports = {
             callback(err)
         })
     },
-
+    /* newItem: a plain JS object with the attributes to set for the topic, second is a callback */
     addItem(newItem, callback){
         return Item.create({
             name: newItem.name,
@@ -41,7 +41,7 @@ module.exports = {
       },
 
     deleteItem(id, callback){
-        return Item.destroy({
+        return Item.destroy({ //destroy method from Item model
             where: {id}
         })
         .then((item) => {
@@ -59,7 +59,7 @@ module.exports = {
             return callback("Item not found");
           }
    
-   //#1
+//We specify which values to target for the update by passing an array of keys to the fields property. 
           item.update(updatedItem, {
             fields: Object.keys(updatedItem)
           })

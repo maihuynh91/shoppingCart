@@ -25,7 +25,8 @@ module.exports = {
     },
 
     create(req, res, next){
-     // console.log(`res is : ${res.json}`)
+  //create actions grabs values from the form from the body property of the request and assigns them
+  //to JS object
      const authorized = new Authorizer(req.user).create();
      if(authorized){
       let newItem = {
@@ -49,7 +50,7 @@ module.exports = {
     show(req, res, next){
       const authorized = new Authorizer(req.user).show();
       if(authorized){
-      itemQueries.getItem(req.params.id, (err, item) => {
+      itemQueries.getItem(req.params.id, (err, item) => { // information we need is in the URL, we use req.params
         if(err || item == null){
           res.redirect(404, "/");
         } else {
@@ -100,9 +101,9 @@ module.exports = {
     update(req, res, next){
       const authorized = new Authorizer(req.user).update();
       if(authorized){ 
+        //id from the URL parameters 
         itemQueries.updateItem(req.params.id, req.body, (err, item) => {
 
-  //#2
           if(err || item == null){
             res.redirect(404, `/items/${req.params.id}/edit`);
           } else {

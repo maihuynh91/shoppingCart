@@ -8,7 +8,7 @@ module.exports = {
         req.checkBody("description", "must be at least 2 characters in length").isLength({min: 2});
       }
   
-      const errors = req.validationErrors();
+      const errors = req.validationErrors(); // gather any validation errors.
   
       if (errors) {
         req.flash("error", errors);

@@ -16,17 +16,20 @@ module.exports = {
         app.use(session({
             secret: process.env.cookieSecret,
             resave: false,
-            saveUninitialized: false,
+            saveUninitialized: false, //prevent a new, unmodified session, from being saved.
             cookie: { maxAge: 1.21e+9 }
           }));
         app.use(flash());
         passportConfig.init(app);
+        
+/* we provide a middleware function to add a variable called currentUser that we can access 
+it from our templates to get the user in session. */
         app.use((req,res,next) => {
             res.locals.currentUser = req.user;
             next();
         });
 
-
+//include the path so that our application knows where to find the assets.
         app.use(express.static(path.join(__dirname, "..", "assets")));
 
     }
