@@ -9,7 +9,7 @@ module.exports = {
         if(err){
           res.redirect(500, "static/index");
         } else {
-          res.render("items/index", {items});
+          res.render("items/index", {items, currentUser:req.user});
         }
       })
     },
@@ -53,7 +53,7 @@ module.exports = {
         if(err || item == null){
           res.redirect(404, "/");
         } else {
-          res.render("items/show", {item});
+          res.render("items/show", {item,  currentUser:req.user});
         }
       });
     }else{
@@ -87,7 +87,8 @@ module.exports = {
         if(err || item == null){
           res.redirect(404, "/");
         } else {
-          res.render("items/edit", {item});
+          res.render("items/edit", {item,  currentUser:req.user});  //currentUser:req.use so frontend to see currentUser
+          //bs fake doesn't add user and no currentUser (client doesn't show currentUser)
         }
       });
     }else{

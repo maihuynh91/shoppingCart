@@ -18,12 +18,12 @@ describe("routes : items", () => {
       })
       .then((user) => {
         this.user = user;
-        request.post({
-          url: "http://localhost:3000/users/sign_in",
-          form: {
-            password: "123456",
-            email: user.email
-          }
+        request.get({
+          url: "http://localhost:3000/auth/fake",
+             form: {
+               userId: user.id,
+               email: user.email
+             }
         })
         Item.create({
           name: "apples",
@@ -43,15 +43,14 @@ describe("routes : items", () => {
   })
 
   describe("user perform CRUD actions for items", () => {
-//failed
+
     describe("GET /items", () => {
-      fit("should render all items", (done) => {
+      it("should render all items", (done) => {
         request.get(base, (err, req, body) => {
           expect(err).toBeNull();
-          //expect(body).toMatch("Items List");
-         //
-          expect(body).toMatch("apples");
-         expect(body.indexOf("Items List") > -1).toBe(true)
+          expect(body).toContain("Items List");
+          expect(body).toContain("apples");
+         //expect(body.indexOf("Items List") > -1).toBe(true)
          //console.log("req: " + JSON.stringify(req))
           done();
         });
@@ -120,11 +119,11 @@ describe("routes : items", () => {
     });
 
     describe("GET /items/:id", () => {
-      //failed
+      
       it("should render a view with the selected item", (done) => {
         request.get(`${base}${this.item.id}`, (err, res, body) => {
           expect(err).toBeNull();
-          expect(body).toBe("apples");
+          expect(body).toContain("apples");
           done();
         });
       });
@@ -148,7 +147,7 @@ describe("routes : items", () => {
         });
       });
     });
-//failed
+
     describe("GET /items/:id/edit", () => {
       it("should render a view with an edit item form", (done) => {
         request.get(`${base}${this.item.id}/edit`, (err, res, body) => {
@@ -156,7 +155,7 @@ describe("routes : items", () => {
           expect(body).not.toBeNull()
           expect(body).toContain("Edit Item");
           expect(body).toContain("apples");
-          expect(body.status).toBe(false)
+          expect(body).toContain('value="false" selected')
           done();
         });
       });
@@ -188,8 +187,6 @@ describe("routes : items", () => {
           })
     })
     })
-   
-
   })
 
 
