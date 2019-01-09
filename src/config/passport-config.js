@@ -6,7 +6,7 @@ const authHelper = require("../auth/helpers");
 module.exports = {
   init(app){
 
-// #2
+// initialize Passport and tell it to use sessions to keep track of authenticated users.
     app.use(passport.initialize());
     app.use(passport.session());
 
